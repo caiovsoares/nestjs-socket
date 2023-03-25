@@ -1,4 +1,5 @@
 # compiled output
+dev.db
 /dist
 /node_modules
 .env
