@@ -1,0 +1,64 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String            @id @default(uuid())
+  login        String            @unique
+  nick         String            @unique
+  password     String
+  lastRoom     String?
+  lastPosition UserLastPosition?
+  lastRotation UserLastRotation?
+}
+
+model UserLastPosition {
+  id        String @id @unique
+  x         Float
+  y         Float
+  z         Float
+  character User   @relation(fields: [id], references: [id])
+
+  @@map("UserLastPosition")
+}
+
+model UserLastRotation {
+  id        String @id @unique
+  w         Float
+  x         Float
+  y         Float
+  z         Float
+  character User   @relation(fields: [id], references: [id])
+
+  @@map("UserLastRotation")
+}
+
+model Room {
+  id   String  @id @default(uuid())
+  name String  @unique
+  open Boolean @default(false)
+
+  teleport     Teleport[] @relation("teleport")
+  teleportToMe Teleport[] @relation("teleportToMe")
+}
+
+model Teleport {
+  id           String @id @default(uuid())
+  fromRoomName String
+  toRoomName   String
+  fromX        Float
+  fromY        Float
+  fromZ        Float
+  toX          Float
+  toY          Float
+  toZ          Float
+  roomFrom     Room   @relation("teleport", fields: [fromRoomName], references: [name])
+  roomTo       Room   @relation("teleportToMe", fields: [toRoomName], references: [name])
+
+  @@map("Teleport")
+}
