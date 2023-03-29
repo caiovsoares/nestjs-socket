@@ -43,6 +43,7 @@ export type Quaternion = {
 export type MessageData = {
   content: string;
   sender: string;
+  senderId: string;
   messageType: Message;
 };
 
