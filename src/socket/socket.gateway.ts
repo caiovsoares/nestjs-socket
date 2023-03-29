@@ -138,9 +138,11 @@ export class SocketGateway implements OnGatewayConnection, OnGatewayDisconnect {
     const player: PlayerData = this.players.get(client.id);
     messageData.sender = player.nick;
     if (messageData.messageType === Message.room)
-      client.to(player.room).emit('newMessage', JSON.stringify(messageData));
+      this.server
+        .to(player.room)
+        .emit('newMessage', JSON.stringify(messageData));
     else if (messageData.messageType === Message.global)
-      client.emit('newMessage', JSON.stringify(messageData));
+      this.server.emit('newMessage', JSON.stringify(messageData));
   }
 
   handleConnection(@ConnectedSocket() client: Socket) {
