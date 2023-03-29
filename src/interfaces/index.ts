@@ -39,3 +39,15 @@ export type Quaternion = {
   y: number;
   z: number;
 };
+
+export type MessageData = {
+  content: string;
+  sender: string;
+  messageType: Message;
+};
+
+export enum Message {
+  room,
+  global,
+  direct,
+}

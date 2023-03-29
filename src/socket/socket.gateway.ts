@@ -9,7 +9,13 @@ import {
   OnGatewayDisconnect,
 } from '@nestjs/websockets';
 import { Socket, Server } from 'socket.io';
-import { MovePlayerData, PlayerData, UserData } from 'src/interfaces';
+import {
+  Message,
+  MessageData,
+  MovePlayerData,
+  PlayerData,
+  UserData,
+} from 'src/interfaces';
 import { SocketService } from './socket.service';
 
 @WebSocketGateway()
@@ -124,6 +130,17 @@ export class SocketGateway implements OnGatewayConnection, OnGatewayDisconnect {
         playerIdList.map((playerId) => this.players.get(playerId)),
       ),
     );
+  }
+
+  @SubscribeMessage('newMessage')
+  newMessage(@ConnectedSocket() client: Socket, @MessageBody() data: string) {
+    const messageData: MessageData = JSON.parse(data);
+    const player: PlayerData = this.players.get(client.id);
+    messageData.sender = player.nick;
+    if (messageData.messageType === Message.room)
+      client.to(player.room).emit('newMessage', JSON.stringify(messageData));
+    else if (messageData.messageType === Message.global)
+      client.emit('newMessage', JSON.stringify(messageData));
   }
 
   handleConnection(@ConnectedSocket() client: Socket) {

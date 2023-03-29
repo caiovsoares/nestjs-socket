@@ -6,9 +6,10 @@ import { UserModule } from './user/user.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import { SocketModule } from './socket/socket.module';
+import { ChatModule } from './chat/chat.module';
 
 @Module({
-  imports: [UserModule, AuthModule, SocketModule],
+  imports: [UserModule, AuthModule, SocketModule, ChatModule],
   controllers: [AppController],
   providers: [
     AppService,
