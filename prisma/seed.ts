@@ -12,7 +12,7 @@ async function main() {
       password: hash,
       nick: 'sian',
       lastRoom: 'Game',
-      lastPosition: { create: { x: 0, y: 1, z: 0 } },
+      lastPosition: { create: { x: 0, y: 0, z: 0 } },
       lastRotation: { create: { w: 0, x: 0, y: 0, z: 0 } },
     },
   });
@@ -23,7 +23,7 @@ async function main() {
       password: hash,
       nick: 'b',
       lastRoom: 'Game',
-      lastPosition: { create: { x: 0, y: 1, z: 0 } },
+      lastPosition: { create: { x: 0, y: 0, z: 0 } },
       lastRotation: { create: { w: 0, x: 0, y: 0, z: 0 } },
     },
   });
@@ -34,7 +34,7 @@ async function main() {
       password: hash,
       nick: 'c',
       lastRoom: 'Game',
-      lastPosition: { create: { x: 0, y: 1, z: 0 } },
+      lastPosition: { create: { x: 0, y: 0, z: 0 } },
       lastRotation: { create: { w: 0, x: 0, y: 0, z: 0 } },
     },
   });
@@ -45,7 +45,7 @@ async function main() {
       password: hash,
       nick: 'd',
       lastRoom: 'Game',
-      lastPosition: { create: { x: 0, y: 1, z: 0 } },
+      lastPosition: { create: { x: 0, y: 0, z: 0 } },
       lastRotation: { create: { w: 0, x: 0, y: 0, z: 0 } },
     },
   });
